@@ -22,7 +22,6 @@ Features:
     'website': 'https://example.com',
     'depends': [
         'hr',
-        'hr_contract',
         'base_setup',
     ],
     'data': [
