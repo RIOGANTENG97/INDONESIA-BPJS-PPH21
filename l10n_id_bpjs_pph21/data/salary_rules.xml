@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+        Sample salary rules.
+        These assume you have a Community payroll module (e.g. om_hr_payroll).
+        Adjust the category_id and structure_id to match your payroll setup.
+        The Python code calls the computation engine.
+    -->
+    <record id="hr_salary_rule_bpjs_jht_ee" model="hr.salary.rule">
+        <field name="name">BPJS JHT Employee</field>
+        <field name="code">BPJS_JHT_EE</field>
+        <field name="sequence">200</field>
+        <field name="category_id" ref="hr_payroll.DED"/>
+        <field name="condition_select">python</field>
+        <field name="condition_python">result = employee.has_bpjs_ketenagakerjaan</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = env['indonesia.payroll.computation'].compute_bpjs(employee, contract.wage).get('jht_ee', 0.0)
+        </field>
+    </record>
+
+    <record id="hr_salary_rule_pph21" model="hr.salary.rule">
+        <field name="name">PPh 21 TER</field>
+        <field name="code">PPH21</field>
+        <field name="sequence">210</field>
+        <field name="category_id" ref="hr_payroll.DED"/>
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = env['indonesia.payroll.computation'].compute_pph21_ter(employee, contract.wage)
+        </field>
+    </record>
+</odoo>

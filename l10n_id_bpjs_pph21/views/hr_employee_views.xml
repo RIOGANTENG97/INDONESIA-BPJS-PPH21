@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_employee_form_indonesia" model="ir.ui.view">
+        <field name="name">hr.employee.form.indonesia</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='personal_information']" position="after">
+                <page name="indonesia_payroll" string="Indonesia Payroll">
+                    <group>
+                        <group string="PPh 21">
+                            <field name="ptkp_status"/>
+                            <field name="ter_category"/>
+                            <field name="npwp"/>
+                        </group>
+                        <group string="BPJS">
+                            <field name="has_bpjs_kesehatan"/>
+                            <field name="has_bpjs_ketenagakerjaan"/>
+                            <field name="bpjs_risk_class"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
